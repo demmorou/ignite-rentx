@@ -1,5 +1,7 @@
-import { ConnectionOptions, createConnection } from 'typeorm';
+import { createConnections } from 'typeorm';
 
-import * as connectionOptions from './ormconfig';
-
-createConnection(connectionOptions as ConnectionOptions);
+createConnections()
+  .then((conn) =>
+    console.log(conn[0].isConnected && `🌱 ${conn[0].name} Database it's alive`)
+  )
+  .catch((err) => console.log(err));

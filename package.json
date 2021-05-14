@@ -6,7 +6,10 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-    "dev:typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js -f src/database/ormconfig.ts",
+    "dev:typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "dev:migration:generate": "yarn dev:typeorm migration:generate --n",
+    "dev:migration:run": "yarn dev:typeorm migration:run",
+    "dev:migration:revert": "yarn dev:typeorm migration:revert",
     "typeorm": "./node_modules/typeorm/cli.js -f ./build/database/ormconfig.js"
   },
   "devDependencies": {
