@@ -3,6 +3,7 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 
 import './database';
+import './shared/container';
 
 import routes from './routes';
 import swagger from './swagger.json';
