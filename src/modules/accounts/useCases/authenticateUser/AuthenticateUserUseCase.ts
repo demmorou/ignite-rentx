@@ -3,6 +3,7 @@ import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
 import { authConfig } from '~config/auth';
+import { AppError } from '~errors/AppError';
 import { IUsersRepository } from '~modules/accounts/repositories/IUsersRepository';
 
 type IRequest = {
@@ -28,11 +29,11 @@ class AuthenticateUserUseCase {
   async execute({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.usersRepository.findByEmail(email);
 
-    if (!user) throw new Error('E-mail or password invalid!');
+    if (!user) throw new AppError('E-mail or password invalid!', 401);
 
     const passwordMatch = await compare(password, user.password);
 
-    if (!passwordMatch) throw new Error('E-mail or password invalid!');
+    if (!passwordMatch) throw new AppError('E-mail or password invalid!', 401);
 
     const token = sign({}, authConfig.SECRET_KEY, {
       subject: user.id,

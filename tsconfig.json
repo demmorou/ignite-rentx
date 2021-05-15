@@ -21,7 +21,9 @@
       "~shared/*": ["shared/*"],
       "~database/*": ["database/*"],
       "~config/*": ["config/*"],
-      "~middlewares/*": ["middlewares/*"]
+      "~middlewares/*": ["middlewares/*"],
+      "~errors/*": ["errors/*"],
+      "~interceptors/*": ["interceptors/*"]
     }
   },
   "include": ["src"]
