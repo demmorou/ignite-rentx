@@ -20,7 +20,8 @@
       "~modules/*": ["modules/*"],
       "~shared/*": ["shared/*"],
       "~database/*": ["database/*"],
-      "~config/*": ["config/*"]
+      "~config/*": ["config/*"],
+      "~middlewares/*": ["middlewares/*"]
     }
   },
   "include": ["src"]
