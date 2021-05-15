@@ -1,6 +1,6 @@
 import { Column, Entity } from 'typeorm';
 
-import BaseEntity from '../../../database/models/Base';
+import { BaseEntity } from '~database/entities/Base';
 
 @Entity('users')
 class User extends BaseEntity {
@@ -20,4 +20,4 @@ class User extends BaseEntity {
   is_admin: boolean;
 }
 
-export default User;
+export { User };

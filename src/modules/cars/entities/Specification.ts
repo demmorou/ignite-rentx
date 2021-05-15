@@ -1,6 +1,6 @@
 import { Column, Entity } from 'typeorm';
 
-import BaseEntity from '../../../database/models/Base';
+import { BaseEntity } from '~database/entities/Base';
 
 @Entity('specifications')
 class Specification extends BaseEntity {
@@ -11,4 +11,4 @@ class Specification extends BaseEntity {
   description: string;
 }
 
-export default Specification;
+export { Specification };
