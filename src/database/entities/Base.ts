@@ -15,4 +15,4 @@ class BaseEntity {
   }
 }
 
-export default BaseEntity;
+export { BaseEntity };

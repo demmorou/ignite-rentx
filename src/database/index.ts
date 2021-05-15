@@ -1,7 +1,11 @@
 import { createConnections } from 'typeorm';
 
 createConnections()
-  .then((conn) =>
-    console.log(conn[0].isConnected && `🌱 ${conn[0].name} Database it's alive`)
+  .then((connections) =>
+    connections.forEach((connection) => {
+      console.log(
+        connection.isConnected && `🌱 ${connection.name} Database it's alive`
+      );
+    })
   )
   .catch((err) => console.log(err));

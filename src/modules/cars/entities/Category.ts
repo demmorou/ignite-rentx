@@ -1,6 +1,6 @@
 import { Column, Entity } from 'typeorm';
 
-import BaseEntity from '../../../database/models/Base';
+import { BaseEntity } from '~database/entities/Base';
 
 @Entity('categories')
 class Category extends BaseEntity {
@@ -11,4 +11,4 @@ class Category extends BaseEntity {
   description: string;
 }
 
-export default Category;
+export { Category };

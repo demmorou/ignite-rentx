@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
-import ICategoriesRepository from '../../repositories/ICategoriesRepository';
+import { ICategoriesRepository } from '~modules/cars/repositories/ICategoriesRepository';
 
 interface IRequest {
   name: string;
@@ -34,4 +34,4 @@ class CreateCategoryUseCase {
   }
 }
 
-export default CreateCategoryUseCase;
+export { CreateCategoryUseCase };

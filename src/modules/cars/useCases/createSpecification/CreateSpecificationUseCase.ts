@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
-import ISpecificationsRepository from '../../repositories/ISpecificationsRepository';
+import { ISpecificationsRepository } from '~modules/cars/repositories/ISpecificationsRepository';
 
 interface IRequest {
   name: string;
@@ -27,4 +27,4 @@ class CreateSpecificationUseCase {
   }
 }
 
-export default CreateSpecificationUseCase;
+export { CreateSpecificationUseCase };
