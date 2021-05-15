@@ -19,7 +19,8 @@
     "paths": {
       "~modules/*": ["modules/*"],
       "~shared/*": ["shared/*"],
-      "~database/*": ["database/*"]
+      "~database/*": ["database/*"],
+      "~config/*": ["config/*"]
     }
   },
   "include": ["src"]
