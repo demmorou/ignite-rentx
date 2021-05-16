@@ -18,6 +18,9 @@ class User extends BaseEntity {
 
   @Column({ default: false })
   is_admin: boolean;
+
+  @Column({ nullable: true })
+  avatar: string;
 }
 
 export { User };
