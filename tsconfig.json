@@ -23,7 +23,8 @@
       "~config/*": ["config/*"],
       "~middlewares/*": ["middlewares/*"],
       "~errors/*": ["errors/*"],
-      "~interceptors/*": ["interceptors/*"]
+      "~interceptors/*": ["interceptors/*"],
+      "~utils/*": ["utils/*"]
     }
   },
   "include": ["src"]
