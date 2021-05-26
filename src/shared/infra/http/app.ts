@@ -3,12 +3,13 @@ import cors from 'cors';
 import express from 'express';
 import 'express-async-errors';
 import swaggerUi from 'swagger-ui-express';
-import './database';
-import './shared/container';
 
+import '~shared/infra/database';
+import '~shared/container';
+
+import swagger from '../../../swagger.json';
 import { errorInterceptor } from './interceptors/errorInterceptor';
 import { routes } from './routes';
-import swagger from './swagger.json';
 
 const app = express();
 
