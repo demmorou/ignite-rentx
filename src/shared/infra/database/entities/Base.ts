@@ -16,13 +16,12 @@ class BaseEntity {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({ nullable: true })
   deleted_at: Date;
 
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
-      this.created_at = new Date();
     }
   }
 }
