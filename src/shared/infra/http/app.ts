@@ -4,12 +4,14 @@ import express from 'express';
 import 'express-async-errors';
 import swaggerUi from 'swagger-ui-express';
 
-import '~shared/infra/database';
+import createdConnection from '~shared/infra/database';
 import '~shared/container';
 
 import swagger from '../../../swagger.json';
 import { errorInterceptor } from './interceptors/errorInterceptor';
 import { routes } from './routes';
+
+createdConnection();
 
 const app = express();
 

@@ -1,11 +1,13 @@
-import { createConnections } from 'typeorm';
+import { Connection, createConnections } from 'typeorm';
 
-createConnections()
-  .then((connections) =>
-    connections.forEach((connection) => {
-      console.log(
-        connection.isConnected && `🌱 ${connection.name} Database it's alive`
-      );
-    })
-  )
-  .catch((err) => console.log(err));
+export default async function connection(): Promise<Connection[]> {
+  const connections = await createConnections();
+
+  connections.forEach((connection) => {
+    console.log(
+      connection.isConnected && `🌱 ${connection.name} Database it's alive`
+    );
+  });
+
+  return connections;
+}

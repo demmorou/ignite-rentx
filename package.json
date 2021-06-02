@@ -11,6 +11,7 @@
     "prepare": "husky install",
     "dev:typeorm": "tsnd -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "typeorm": "./node_modules/typeorm/cli.js",
+    "dev:seed": "tsnd -r tsconfig-paths/register src/shared/infra/database/seed/index.ts",
     "test": "jest"
   },
   "config": {
