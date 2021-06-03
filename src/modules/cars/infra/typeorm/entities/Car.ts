@@ -1,8 +1,16 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+} from 'typeorm';
 
 import { BaseEntity } from '~shared/infra/database/entities/Base';
 
 import { Category } from './Category';
+import { Specification } from './Specification';
 
 @Entity('cars')
 class Car extends BaseEntity {
@@ -38,6 +46,20 @@ class Car extends BaseEntity {
   })
   @JoinColumn({ name: 'fk_category_id' })
   category: Category;
+
+  @ManyToMany(() => Specification)
+  @JoinTable({
+    name: 'specifications_cars',
+    joinColumn: {
+      name: 'fk_car_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'fk_specification_id',
+      referencedColumnName: 'id',
+    },
+  })
+  specifications: Specification[];
 }
 
 export { Car };
