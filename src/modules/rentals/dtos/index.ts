@@ -1,0 +1,1 @@
+export { ICreateRentalDTO } from './ICreateRentalDTO';
