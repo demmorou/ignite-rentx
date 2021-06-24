@@ -3,6 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { IDateProvider } from '~shared/container/providers/DateProvider/models/IDateProvider';
 import { AppError } from '~shared/errors/AppError';
 
+import { ICarsRepository } from '~modules/cars/repositories/ICarsRepository';
 import { ICreateRentalDTO } from '~modules/rentals/dtos';
 import { Rental } from '~modules/rentals/infra/typeorm/entities/Rental';
 import { IRentalsRepository } from '~modules/rentals/repositories/IRentalsRepository';
@@ -13,7 +14,9 @@ class CreateRental {
     @inject('RentalsRepository')
     private readonly rentalsRepository: IRentalsRepository,
     @inject('DateProvider')
-    private readonly dateProvider: IDateProvider
+    private readonly dateProvider: IDateProvider,
+    @inject('CarsRepository')
+    private readonly carsRepository: ICarsRepository
   ) {}
   async execute({
     car_id,
@@ -50,6 +53,8 @@ class CreateRental {
       expected_return_date,
       user_id,
     });
+
+    await this.carsRepository.updateAvailable(car_id, false);
 
     return rental;
   }

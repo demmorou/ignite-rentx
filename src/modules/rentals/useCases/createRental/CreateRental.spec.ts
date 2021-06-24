@@ -22,7 +22,11 @@ describe('Create Rental', () => {
     carsRepository = new MemoryCarsRepository();
     rentalsRepository = new MemoryRentalsRepository();
     dateProvider = new DayJsProvider();
-    createRental = new CreateRental(rentalsRepository, dateProvider);
+    createRental = new CreateRental(
+      rentalsRepository,
+      dateProvider,
+      carsRepository
+    );
     expected_return_date = dayjs(new Date()).add(2, 'days').toDate();
   });
 
