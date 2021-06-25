@@ -11,6 +11,9 @@
   "paths": {
     "/categories": {
       "post": {
+        "security": [
+          { "bearerAuth": [] }
+        ],
         "tags": ["Category"],
         "summary": "Create a category",
         "description": "Create a new category",
@@ -75,6 +78,9 @@
     },
     "/categories/import": {
       "post": {
+        "security": [
+          { "bearerAuth": [] }
+        ],
         "tags": ["Category"],
         "summary": "Upload categories",
         "description": "Upload categories",
@@ -102,6 +108,9 @@
     },
     "/specifications": {
       "post": {
+        "security": [
+          { "bearerAuth": [] }
+        ],
         "tags": ["Specification"],
         "summary": "Create a specification",
         "description": "Create a new Specification",
@@ -123,6 +132,109 @@
           }
         }
       }
+    },
+    "/sessions": {
+      "post": {
+        "tags": ["Sessions"],
+        "summary": "Authentication user",
+        "description": "Authentication user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "E-mail or password invalid!"
+          }
+        }
+      }
+    },
+    "/cars": {
+      "post": {
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "tags": ["Cars"],
+        "summary": "Create a new car",
+        "description": "Create a new car",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Car"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Car already exists"
+          }
+        }
+      }
+    },
+    "/cars/images/{id}": {
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Upload car images",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "description": "upload car images",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car already exists",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -135,6 +247,42 @@
         "description": {
           "type": "string"
         }
+      }
+    },
+    "Car": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "daily_rate": {
+          "type": "number"
+        },
+        "license_plate": {
+          "type": "string"
+        },
+        "fine_amount": {
+          "type": "number"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "category_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "jwt"
       }
     }
   }
