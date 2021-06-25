@@ -1,4 +1,4 @@
-import { inject } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 
 import { IDateProvider } from '~shared/container/providers/DateProvider/models/IDateProvider';
 import { AppError } from '~shared/errors/AppError';
@@ -11,6 +11,7 @@ type IRequest = {
   rental_id: string;
 };
 
+@injectable()
 class DevolutionRental {
   constructor(
     @inject('RentalsRepository')

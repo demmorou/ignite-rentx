@@ -56,6 +56,14 @@ class MemoryRentalsRepository implements IRentalsRepository {
 
     return rental;
   }
+
+  async findByUserId(user_id: string): Promise<Rental[]> {
+    const rentals = this.rentals.filter(
+      (rental) => rental.fk_user_id === user_id
+    );
+
+    return rentals;
+  }
 }
 
 export { MemoryRentalsRepository };

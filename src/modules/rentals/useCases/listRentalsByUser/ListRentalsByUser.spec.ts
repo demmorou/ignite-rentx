@@ -8,10 +8,10 @@ import { MemoryCarsRepository } from '~modules/cars/repositories/in-memory/Memor
 import { MemoryRentalsRepository } from '~modules/rentals/repositories/memory/MemoryRentalsRepository';
 
 import { CreateRental } from '../createRental';
-import { DevolutionRental } from './DevolutionRental';
+import { ListRentalsByUser } from './ListRentalsByUser';
 
-describe('Devolution Rental', () => {
-  let devolutionRental: DevolutionRental;
+describe('List Rentals By User', () => {
+  let listRentals: ListRentalsByUser;
   let createRental: CreateRental;
   let rentalsRepository: MemoryRentalsRepository;
   let usersRepository: MemoryUsersRepository;
@@ -29,16 +29,12 @@ describe('Devolution Rental', () => {
       dateProvider,
       carsRepository
     );
-    devolutionRental = new DevolutionRental(
-      rentalsRepository,
-      carsRepository,
-      dateProvider
-    );
+    listRentals = new ListRentalsByUser(rentalsRepository);
 
     expected_return_date = dayjs(new Date()).add(2, 'days').toDate();
   });
 
-  it('should be able devolution a rental', async () => {
+  it('should be able list all rentals by an user', async () => {
     await usersRepository.create({
       driver_license: '123123',
       email: 'user@rentx.com.br',
@@ -64,43 +60,9 @@ describe('Devolution Rental', () => {
       user_id: user.id,
     });
 
-    const returnedRental = await devolutionRental.execute({
-      rental_id: rental.id,
-    });
+    const rentals = await listRentals.execute({ user_id: user.id });
 
-    expect(returnedRental.end_date).toBeTruthy();
-  });
-
-  it('should not be able devolution a nonexistent rental', async () => {
-    await usersRepository.create({
-      driver_license: '123123',
-      email: 'user@rentx.com.br',
-      name: 'Rentx',
-      password: 'rentx123',
-    });
-
-    const user = await usersRepository.findByEmail('user@rentx.com.br');
-
-    const car = await carsRepository.create({
-      name: 'Car Available',
-      description: 'Car 1',
-      brand: 'Brand',
-      daily_rate: 100,
-      fine_amount: 19,
-      license_plate: 'DEUS-0000',
-      category_id: 'category',
-    });
-
-    await createRental.execute({
-      car_id: car.id,
-      expected_return_date,
-      user_id: user.id,
-    });
-
-    await expect(
-      devolutionRental.execute({
-        rental_id: 'nonexistent rental',
-      })
-    ).rejects.toHaveProperty('message', 'Rental does not exists');
+    expect(rentals).toEqual([rental]);
+    expect(rentals.length).toBe(1);
   });
 });
