@@ -1,0 +1,30 @@
+import { ICreateUserTokenDTO } from '~modules/accounts/dtos/ICreateUserTokenDTO';
+import { UserToken } from '~modules/accounts/infra/typeorm/entities/UserToken';
+
+import { IUsersTokensRepository } from '../IUsersToensRepository';
+
+class MemoryUsersTokensRepository implements IUsersTokensRepository {
+  private users_tokens: UserToken[] = [];
+
+  async create({
+    expires_at,
+    refresh_token,
+    user_id,
+  }: ICreateUserTokenDTO): Promise<UserToken> {
+    const userToken = new UserToken();
+
+    Object.assign(userToken, {
+      created_at: new Date(),
+      updated_at: new Date(),
+      expires_at,
+      refresh_token,
+      fK_user_id: user_id,
+    });
+
+    this.users_tokens.push(userToken);
+
+    return userToken;
+  }
+}
+
+export { MemoryUsersTokensRepository };
