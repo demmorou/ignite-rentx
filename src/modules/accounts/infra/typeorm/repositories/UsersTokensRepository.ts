@@ -46,6 +46,14 @@ class UsersTokensRepository implements IUsersTokensRepository {
 
     return userToken;
   }
+
+  async findByRefreshToken(token: string): Promise<UserToken> {
+    const userToken = await this.repository.findOne({
+      where: { refresh_token: token },
+    });
+
+    return userToken;
+  }
 }
 
 export { UsersTokensRepository };

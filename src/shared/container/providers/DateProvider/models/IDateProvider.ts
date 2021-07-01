@@ -5,6 +5,7 @@ interface IDateProvider {
   now(): Date;
   addDays(days: number): Date;
   addHours(hours: number): Date;
+  compareIsBefore(start: Date, end: Date): boolean;
 }
 
 export { IDateProvider };
